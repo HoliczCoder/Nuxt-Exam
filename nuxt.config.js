@@ -42,7 +42,7 @@ export default {
   modules: ["@nuxtjs/axios", "@nuxtjs/universal-storage"],
   axios: {
     baseURL:
-      "https://newsapi.org/v2/everything?q=tesla&from=2022-03-18&sortBy=publishedAt&apiKey=8bec69b1fc4241e19f6a7d4dc0c73010",
+      "https://newsapi.org/v2/everything?q=telsa&from=2022-03-18&sortBy=publishedAt&apiKey=8bec69b1fc4241e19f6a7d4dc0c73010",
     browserBaseURL:
       "https://newsapi.org/v2/everything?q=tesla&from=2022-03-18&sortBy=publishedAt&apiKey=8bec69b1fc4241e19f6a7d4dc0c73010   ",
   },

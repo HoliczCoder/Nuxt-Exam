@@ -6,6 +6,6 @@ export default ($axios) => ({
     return $axios.get("products");
   },
   getList() {
-    return $axios.get("");
+    return $axios.get();
   },
 });
