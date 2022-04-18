@@ -1,32 +1,62 @@
 <template>
   <div>
-    <div v-if="$fetchState.pending">Đang load</div>
-    <div v-if="!$fetchState.pending && !$fetchState.error">{{ homeData }}</div>
+    <div>
+      <!--   <div>
+        <button @click="start()">Click here to search</button>
+      </div> -->
+    </div>
+    <div class="show-product" v-for="(item, index) in homeData" :key="index">
+      <div>{{ item.author }}</div>
+      <div>{{ item.content }}</div>
+      <div><img :src="item.urlToImage" /></div>
+      <div>{{ item.description }}</div>
+      <a class="bg-red-500 text-2xl font-semibold" :href="item.url"
+        >Click here to see detail articles</a
+      >
+      <div class="flex justify-center">
+        <div class="bg-blue-500 w-72">
+          <a href="#" @click="AddToFavorites(item)">Add to Favorites</a>
+        </div>
+      </div>
+      <div class="m-3">
+        <a
+          class="mt-20 w-full px-5 text-center bg-yellow-400 py-2 rounded-lg"
+          :href="'https://www.facebook.com/sharer/sharer.php?u=' + item.url"
+          ><i class="fa-solid fa-share"></i> facebook</a
+        >
+      </div>
+      <div class="m-3">
+        <a
+          class="mt-20 w-full px-5 text-center bg-yellow-400 py-2 rounded-lg"
+          :href="
+            'http://twitter.com/share?text=text&url=http://' +
+            item.url +
+            '&hashtags=hashtag1,hashtag2,hashtag3'
+          "
+          ><i class="fa-solid fa-share"></i> twitter</a
+        >
+      </div>
+    </div>
+    <div></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: "IndexPage",
   data() {
     return {
       homeData: null,
-    }
+    };
   },
-  //SSR
-/*  async asyncData({$axios}) {
-    const {data} = await $axios.get('/home')
-    return {
-      data: data
-    }
-  },*/
-  //SSR
+
   async fetch() {
     if (process.client) {
-      //thực thi các lệnh thuộc về trình duyệt
     }
-    this.homeData =await this.$repositories.home.getHome(); //await this.$axios.get('/home');
+    this.homeData = await this.$repositories.home.getList();
+    this.homeData = this.homeData.articles;
+    console.log(this.homeData);
   },
-  fetchOnServer: false
-}
+  fetchOnServer: false,
+};
 </script>
